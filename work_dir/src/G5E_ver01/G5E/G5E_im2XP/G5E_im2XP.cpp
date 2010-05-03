@@ -28,9 +28,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	gdraw.gdrawobjects->addwmo(&gworldmeshobject);
 	gdraw.gdrawobjects->addwmo(&gworldmeshobject2);
 
+	gdraw.gcamera->setClippingPlanes(0.1f,2000.0f);
+
 	G5ETerrainObject gtobj = G5ETerrainObject(10.0f,-10.0f);  // (maximale Höhe, minimale Höhe) - 255 wird also auf -10 bis 10 skaliert
-	gtobj.gettxtdata("test.txt",500,500,1); // (file, Anzahl Bytes X, Anzahl Bytes Z, Schritt (1- jedes element; 2 - jedes zweite)
-	gtobj.scalef(0.1f,0.1f,0.1f);
+	//gtobj.gettxtdata("test.txt",500,500,1);
+	gtobj.gettxtdata("Terrain.raw",1024,1024,4);// (file, Anzahl Bytes X, Anzahl Bytes Z, Schritt (1- jedes element; 2 - jedes zweite)
+	//gtobj.scalef(0.1f,0.1f,0.1f);
 	gdraw.gdrawobjects->addto(&gtobj); // hinzufügen des generierten terrainobjects zum drawobject
 	//gmeshobject.point = G5EPoint(0.0f,0.0f,-5.0f);
 	
