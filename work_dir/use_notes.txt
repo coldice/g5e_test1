@@ -1,7 +1,7 @@
 dasd
 line 1
 line 2
-line 3
+line 3changed
 line 4
 line 5
 change 18:44
