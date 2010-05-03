@@ -61,6 +61,29 @@ G5EVector3 G5EVector3::operator -(G5EVector3 INgvector3)
 	retVec3.v3 = this->v3 - INgvector3.v3;
 	return retVec3;
 }	
+G5EVector3 G5EVector3::operator=(G5EPoint INgpoint)
+{
+	this->v1 = INgpoint.x;
+	this->v2 = INgpoint.y;
+	this->v3 = INgpoint.z;
+	return *this;
+}
+G5EVector3 G5EVector3::operator-(G5EPoint INgpoint)
+{
+	G5EVector3 tempvec3;
+	tempvec3.v1 = this->v1 - INgpoint.x;
+	tempvec3.v2 = this->v2 - INgpoint.y;
+	tempvec3.v3 = this->v3 - INgpoint.z;
+	return tempvec3;
+}
+G5EVector3 G5EVector3::operator+(G5EPoint INgpoint)
+{
+	G5EVector3 tempvec3;
+	tempvec3.v1 = this->v1 + INgpoint.x;
+	tempvec3.v2 = this->v2 + INgpoint.y;
+	tempvec3.v3 = this->v3 + INgpoint.z;
+	return tempvec3;
+}
 G5EVector3 G5EVector3::operator -=(G5EVector3 INgvector3)
 {
 	this->v1 -= INgvector3.v1;
@@ -74,6 +97,14 @@ G5EVector3 G5EVector3::operator =(G5EVector3 INgvector3)
 	this->v2 = INgvector3.v2;
 	this->v3 = INgvector3.v3;
 	return *this;
+}
+G5EVector3 G5EVector3::operator*(float INskalar)
+{
+	G5EVector3 tempVec3;
+	tempVec3.v1 = this->v1*INskalar;
+	tempVec3.v2 = this->v2*INskalar;
+	tempVec3.v3 = this->v3*INskalar;
+	return tempVec3;
 }
 bool G5EVector3::operator==(G5EVector3 INgvector3)
 {
@@ -260,7 +291,15 @@ G5EMatrix4 G5EMatrix4::getCurrentGLMatrix()
 	*this = G5EMatrix4(m);
 	return *this;
 }
-
+G5EMatrix4 G5EMatrix4::getRotationMatrix(float angle, G5EVector3 rotaxis3)
+{
+	glPushMatrix();
+		glLoadIdentity();
+		glRotatef(angle, rotaxis3.v1, rotaxis3.v2, rotaxis3.v3);
+		this->getCurrentGLMatrix();
+	glPopMatrix();
+	return *this;
+}
 /********************************** MATRIX 3 *************************************/
 G5EMatrix3::G5EMatrix3()
 {
@@ -425,5 +464,11 @@ G5EMatrix3 G5EMatrix3::transpose()
 	this->a[5] = tempMat3.a[7];
 	this->a[6] = tempMat3.a[2];
 	this->a[7] = tempMat3.a[5];
+	return *this;
+}
+G5EMatrix3 G5EMatrix3::getRotationMatrix(float angle, G5EVector3 rotaxis3)
+{
+	G5EMatrix4 tempMat4;
+	*this = tempMat4.getRotationMatrix(angle, rotaxis3);
 	return *this;
 }

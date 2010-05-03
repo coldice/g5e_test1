@@ -21,9 +21,13 @@ public:
 	~G5EVector3();
 	G5EVector3 operator+(G5EVector3 INgvector3);
 	G5EVector3 operator=(G5EVector3 INgvector3);
+	G5EVector3 operator=(G5EPoint INgpoint);
 	G5EVector3 operator-(G5EVector3 INgvector3);
+	G5EVector3 operator-(G5EPoint INgpoint);
+	G5EVector3 operator+(G5EPoint INgpoint);
 	G5EVector3 operator+=(G5EVector3 INgvector3);
 	G5EVector3 operator-=(G5EVector3 INgvector3);
+	G5EVector3 operator*(float INskalar);
 	bool operator==(G5EVector3 INgvector3);
 	float dot(G5EVector3 INgvector3);
 	G5EVector3 cross(G5EVector3 INgvector3);
@@ -58,6 +62,7 @@ public:
 	~G5EMatrix4();
 	G5EMatrix4 operator*(G5EMatrix4 INgmatrix4);
 	G5EMatrix4 getCurrentGLMatrix();
+	G5EMatrix4 getRotationMatrix(float angle, G5EVector3 rotaxis3);
 	//G5EMatrix4 operator=(G5EMatrix3 INgmatrix3);
 };
 class G5EMatrix3
@@ -72,6 +77,7 @@ public:
 	G5EMatrix3 operator=(G5EMatrix4 INgmatrix4);
 	G5EMatrix3 operator=(G5EMatrix3 INgmatrix3);
 	G5EMatrix3 operator-(G5EMatrix3 INgmatrix3);
+	G5EMatrix3 getRotationMatrix(float angle, G5EVector3 rotaxis);
 	G5EMatrix3 invert();
 	G5EMatrix3 transpose();
 };

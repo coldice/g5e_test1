@@ -35,11 +35,10 @@ private:
 public:
 	G5EText gtext;
 	G5ESystem *gsystem;
-	G5EDrawCamera *gcam;
 	G5EDrawObjects *gdrawobjects;
 	G5ETimer *fpstimer;
 	G5ECamera *gcamera;
-	float fps;
+	double fps;
 
 	G5EDraw();
 	~G5EDraw();

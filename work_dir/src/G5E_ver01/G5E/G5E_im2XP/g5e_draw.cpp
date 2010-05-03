@@ -140,7 +140,6 @@ G5EDrawObjects::~G5EDrawObjects()
 G5EDraw::G5EDraw()
 {
 	gdrawobjects = new(G5EDrawObjects);
-	gcam = new G5EDrawCamera(45.0f,0.1f,500.0f);
 	gcamera = new G5ECamera();
 }
 
@@ -156,50 +155,59 @@ int G5EDraw::init(G5ESystem *INgsystem)
 }
 	// draw run
 	// called by main loop
-int G5EDraw::run() //                   -------------------------------   Hier ist absolut noch baustelle.. macht auch sinn zum testen etc. --------------------------
+int G5EDraw::run() //                  
 {
-	if(gsystem->keystates[SDLK_UP]) gcam->rotateX(-0.1f);
-	if(gsystem->keystates[SDLK_DOWN]) gcam->rotateX(0.1f);
-	if(gsystem->keystates[SDLK_LEFT]) gcamera->rotateLeft();//gcam->rotateY(-0.1f);
-	if(gsystem->keystates[SDLK_RIGHT]) gcamera->rotateRight();//gcam->rotateY(0.1f);
-	if(gsystem->keystates[SDLK_q]) gcamera->rollLeft();//gcam->rotateZ(-0.1f);
-	if(gsystem->keystates[SDLK_e]) gcamera->rollRight();//gcam->rotateZ(0.1f);
-	if(gsystem->keystates[SDLK_w]) gcam->moveForwards(0.1f);
-	if(gsystem->keystates[SDLK_s]) gcam->moveBackwards(0.1f);
-	if(gsystem->keystates[SDLK_a]) gcam->moveLeft(0.01f);
-	if(gsystem->keystates[SDLK_d]) gcam->moveRight(0.01f);
-	if(gsystem->keystates[SDLK_PAGEUP]) gcam->zoom(0.05f);
-	if(gsystem->keystates[SDLK_PAGEDOWN]) gcam->zoom(-0.05f);
-	if(gsystem->keystates[SDLK_r]) gdrawobjects->gworldmeshobject[0]->rotatef(0.0f,0.1f,0.0f);
-	if(gsystem->keystates[SDLK_t]) gdrawobjects->gworldmeshobject[1]->rotatef(0.0f,0.1f,0.0f);
+	/* Zurücksetzen der Einstellungen, der Pipelines und des Bildpuffers */
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
-	gcam->LoadPerspective(); // Zunächst aufgegliedert in unterschiedliche Funktion. Kann aber bei den derzeitigen Aufgaben auch zsm. gefasst werden.
-	//gcam->LoadRotation();
-	//gcam->LoadTranslation();
-	gcamera->SetTransformation();
-		/* Zeichnen des Meshobjects über die drawlist */
+
+	/* Laden der Kameraeinstellungen */
+	gcamera->LoadPerspective(); 
+	gcamera->LoadTransformation();
+
 	
+	/* Zeichnen des Meshobjects über die drawlist */
 	gdrawobjects->draw_terrainslist();	
 	gdrawobjects->draw_meshslist();
 	glTranslatef(0.0f,0.0f,-5.0f);
 	gdrawobjects->draw_meshsdirect();
-		/* FPS ausgabe */
+
+
+	/* Momentane FPS Darstellung */
 	if(this->fpstimer->check(0.1,1))
 	{                          
 		fps = this->gsystem->gtime->getffps();
 	}
 	gtext.print(100,100, 100, 0, 0, 0.1f, "%.1f", fps);		
-		
+
+	/* Diesdas*/
+	gdrawobjects->gworldmeshobject[0]->translatef(0.01f,0,0);	
+
 	//swap sdl buffer
 	SDL_GL_SwapBuffers();
+
+
+	/* Momentane Tastarturabfrage */
+	if(gsystem->keystates[SDLK_UP]) gcamera->rotateUp(0.5f);//gcam->rotateX(-0.1f);
+	if(gsystem->keystates[SDLK_DOWN]) gcamera->rotateDown(0.5f);//gcam->rotateX(0.1f);
+	if(gsystem->keystates[SDLK_LEFT]) gcamera->rotateLeft(0.5f);//gcam->rotateY(-0.1f);
+	if(gsystem->keystates[SDLK_RIGHT]) gcamera->rotateRight(0.5f);//gcam->rotateY(0.1f);
+	if(gsystem->keystates[SDLK_q]) gcamera->rollLeft(0.5f);//gcam->rotateZ(-0.1f);
+	if(gsystem->keystates[SDLK_e]) gcamera->rollRight(0.5f);//gcam->rotateZ(0.1f);
+	if(gsystem->keystates[SDLK_w]) gcamera->moveFor(0.1f);//gcam->moveForwards(0.1f);
+	if(gsystem->keystates[SDLK_s]) gcamera->moveBack(0.1f);//gcam->moveBackwards(0.1f);
+	if(gsystem->keystates[SDLK_a]) gcamera->moveLeft(0.1f);//gcam->moveLeft(0.01f);
+	if(gsystem->keystates[SDLK_d]) gcamera->moveRight(0.1f);//gcam->moveRight(0.01f);
+	if(gsystem->keystates[SDLK_PAGEUP]) gcamera->zoom(0.05f);
+	if(gsystem->keystates[SDLK_PAGEDOWN]) gcamera->zoom(-0.05f);
+	if(gsystem->keystates[SDLK_r]) gcamera->free();
+	if(gsystem->keystates[SDLK_t]) gcamera->center(this->gdrawobjects->gworldmeshobject[0]);
 	return 0;
 }
 int G5EDraw::free()
 {
 	this->gtext.free();
 	delete this->fpstimer;
-	delete this->gcam;
 	delete this->gcamera;
 	delete this->gdrawobjects;
 	return 1;
