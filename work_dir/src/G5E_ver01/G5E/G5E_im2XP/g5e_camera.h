@@ -5,6 +5,8 @@
 #define MIN_DISTANCE 5
 #include "g5e_std.h"
 #include "g5e_world.h"
+
+
 class G5ECamera
 {
 private:
