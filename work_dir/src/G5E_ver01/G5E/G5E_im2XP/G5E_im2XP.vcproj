@@ -183,6 +183,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\g5e_interface.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\g5e_log.cpp"
 				>
 			</File>
@@ -222,6 +226,10 @@
 			</File>
 			<File
 				RelativePath=".\g5e_include.h"
+				>
+			</File>
+			<File
+				RelativePath=".\g5e_interface.h"
 				>
 			</File>
 			<File
