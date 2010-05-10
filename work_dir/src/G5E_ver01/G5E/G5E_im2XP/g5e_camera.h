@@ -10,7 +10,7 @@
 class G5ECamera
 {
 private:
-	G5EVector3 pos;
+	
 	G5EVector3 viewvec3;
 	G5EVector3 upvec3;
 	float viewangle;
@@ -21,6 +21,8 @@ public:
 	G5ECamera();
 	~G5ECamera();
 	
+	G5EVector3 pos; // !temporarely public!
+
 	void SetPosition(float INx, float INy, float INz);
 	void SetPosition(G5EVector3 INposvec3);
 	int SetViewVec3(float INx, float INy, float INz);

@@ -20,4 +20,5 @@
 #include "g5e_system.h"
 #include "g5e_world.h"
 #include "g5e_draw.h"
+#include "g5e_interface.h"
 

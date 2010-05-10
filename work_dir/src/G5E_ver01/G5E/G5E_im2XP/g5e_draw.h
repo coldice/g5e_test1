@@ -44,6 +44,7 @@ public:
 	~G5EDraw();
 	int init(G5ESystem *INgsystem);
 	int run();
+	int run_end();
 	int free();
 };
 #endif

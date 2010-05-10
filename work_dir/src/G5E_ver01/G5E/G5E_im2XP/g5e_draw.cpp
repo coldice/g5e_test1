@@ -184,7 +184,7 @@ int G5EDraw::run() //
 	gdrawobjects->gworldmeshobject[0]->translatef(0.01f,0,0);	
 
 	//swap sdl buffer
-	SDL_GL_SwapBuffers();
+	//SDL_GL_SwapBuffers(); -> moved to run_end
 
 
 	/* Momentane Tastarturabfrage */
@@ -202,6 +202,12 @@ int G5EDraw::run() //
 	if(gsystem->keystates[SDLK_PAGEDOWN]) gcamera->zoom(-0.05f);
 	if(gsystem->keystates[SDLK_r]) gcamera->free();
 	if(gsystem->keystates[SDLK_t]) gcamera->center(this->gdrawobjects->gworldmeshobject[0]);
+	return 0;
+}
+
+int G5EDraw::run_end() {
+	SDL_GL_SwapBuffers();
+
 	return 0;
 }
 int G5EDraw::free()
