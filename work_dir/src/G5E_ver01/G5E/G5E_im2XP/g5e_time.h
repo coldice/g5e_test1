@@ -18,7 +18,7 @@ class G5ETime
 {
 private:
 	int lasttime;
-	double fps;
+	
 	double spf;
 public:	
 	G5ETime();
@@ -26,5 +26,6 @@ public:
 	double getffps();
 	int getifps();
 	double getspf();
+	double fps; //temporarely made public
 };
 #endif

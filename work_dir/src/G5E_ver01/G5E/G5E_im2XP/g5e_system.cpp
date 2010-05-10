@@ -46,15 +46,23 @@ int G5ESystem::init_sdlwindow()
 {
 	SDL_Init(SDL_INIT_VIDEO);
 
+	/*
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_BLUE_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 0);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-
+*/
 	SDL_WM_SetCaption("engine test 5", 0);
-	this->surface = SDL_SetVideoMode(s_width, s_height, 32, SDL_OPENGL);
+	
+	//this->ifsurface = SDL_SetVideoMode(s_width, s_height, 0, SDL_SWSURFACE);
+	this->surface = SDL_SetVideoMode(s_width, s_height, 32, SDL_OPENGL); //32 SDL_OPENGL | SDL_HWSURFACE SDL_SWSURFACE
+//	check -> if(SDL_BYTEORDER == SDL_BIG_ENDIAN) turn values
+
+	this->ifsurface = SDL_CreateRGBSurface(SDL_SWSURFACE, 800, 600, 32, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
+	//SDL_SetPalette (ifsurface, SDL_LOGPAL | SDL_PHYSPAL, this->surface->format->palette->colors,0, this->surface->format->palette->ncolors);
+
 
 	return 0;
 }

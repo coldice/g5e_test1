@@ -16,6 +16,7 @@ public:
 	Uint8 *keystates;
 	bool runstate;
 	SDL_Surface* surface;
+	SDL_Surface* ifsurface;
 	/*	G5ESystem(int width, int height, bool window) {    
 		s_width = width;
 		s_height = height;

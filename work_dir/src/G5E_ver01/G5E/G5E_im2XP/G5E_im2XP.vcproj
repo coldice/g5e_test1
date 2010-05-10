@@ -210,6 +210,10 @@
 				RelativePath=".\g5e_world.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\NFont.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Headerdateien"
@@ -258,6 +262,10 @@
 			</File>
 			<File
 				RelativePath=".\g5e_world.h"
+				>
+			</File>
+			<File
+				RelativePath=".\NFont.h"
 				>
 			</File>
 		</Filter>
