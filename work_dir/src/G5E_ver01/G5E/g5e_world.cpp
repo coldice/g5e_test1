@@ -168,4 +168,5 @@ int G5ETerrainObject::setHeight(float height, int x, int z)
 {
 	if(x < -(this->dimX/2) || x > this->dimX/2-1 || z < -(this->dimZ/2) || z > this->dimZ/2-1) return G5E_INVALID_VALUE;
 	this->heightmap[x+(this->dimX/2) + dimX * (z+(this->dimZ/2))]=height;
+	return 0;
 }
