@@ -28,7 +28,7 @@ public:
 	G5EPoint rotate;
 	G5EPoint translation;
 	G5EPoint scale;
-	G5EWorldObject(){}
+	G5EWorldObject();
 	void rotatef(float INrotX, float INrotY, float INrotZ);
 	void translatef(float INtransX, float INtransY, float INtransZ);
 	void scalef(float INscaleX, float INscaleY, float INscaleZ);
@@ -43,15 +43,18 @@ public:
 class  G5ETerrainObject : public G5EWorldObject
 {
 private:
-	unsigned int dimX,dimZ;
+	int dimX,dimZ;
 	float maxheight,minheight;
 public:
 	float *heightmap;
+	G5ETerrainObject();
 	G5ETerrainObject(float INmaxheight, float INminheight);
-	int gettxtdata(char *file, unsigned int INsizex, unsigned int INsizez, unsigned int step);
-	unsigned int getdimX();
-	unsigned int getdimZ();
+	int gettxtdata(char *file, int INsizex, int INsizez, int step);
+	int getdimX();
+	int getdimZ();
 	float getmax();
 	float getmin();
+	float getHeight(int x, int z);
+	int setHeight(float height, int x, int z);
 };
 #endif

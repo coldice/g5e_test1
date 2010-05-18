@@ -68,7 +68,12 @@ int G5EMeshObject::add(G5EPoint *point)
 	return 0;
 }
 
-
+G5EWorldObject::G5EWorldObject()
+{
+	scale.x = 1;
+	scale.y = 1;
+	scale.z = 1;
+}
 void G5EWorldObject::rotatef(float INrotX, float INrotY, float INrotZ)
 {
 	rotate.x +=INrotX;
@@ -89,9 +94,9 @@ void G5EWorldObject::translatef(float INtransX, float INtransY, float INtransZ)
 }
 void G5EWorldObject::scalef(float INscaleX, float INscaleY, float INscaleZ)
 {
-	scale.x =INscaleX;
-	scale.y =INscaleY;
-	scale.z =INscaleZ;
+	scale.x = INscaleX;
+	scale.y = INscaleY;
+	scale.z = INscaleZ;
 }
 
 G5EWorldMeshObject::G5EWorldMeshObject(){}
@@ -99,13 +104,17 @@ G5EWorldMeshObject::G5EWorldMeshObject(G5EMeshObject *INgmeshobject)
 {
 	gmeshobject = INgmeshobject;
 }
-
+G5ETerrainObject::G5ETerrainObject()
+{
+	this->maxheight = 255;
+	this->minheight = 0;
+}
 G5ETerrainObject::G5ETerrainObject(float INmaxheight, float INminheight)
 {
 	this->maxheight = INmaxheight;
 	this->minheight = INminheight;
 }
-int G5ETerrainObject::gettxtdata(char *file, unsigned int INsizex, unsigned int INsizez, unsigned int step = 1)
+int G5ETerrainObject::gettxtdata(char *file, int INsizex, int INsizez, int step = 1)
 {
 	this->dimX = (INsizex/step);
 	this->dimZ = (INsizez/step);
@@ -113,18 +122,18 @@ int G5ETerrainObject::gettxtdata(char *file, unsigned int INsizex, unsigned int 
 	FILE *data;
 	fopen_s(&data,file,"r");
 	if(data == NULL) return 0;
-	for(unsigned int n1=0;n1<this->dimX;n1++)
+	for(int n1=0;n1<this->dimX;n1++)
 	{
-		for(unsigned int n2=0;n2<this->dimZ;n2++)
+		for(int n2=0;n2<this->dimZ;n2++)
 		{
 			heightmap[n1+this->dimX*n2] = this->minheight+((this->maxheight-this->minheight)/255.0f)*fgetc(data);
-			for(unsigned int n3=0;n3<step-1;n3++)
+			for(int n3=0;n3<step-1;n3++)
 			{
 				fgetc(data);
 			}
 	
 		}
-		for(unsigned int n3=0;n3<(step-1)*INsizex;n3++)
+		for(int n3=0;n3<(step-1)*INsizex;n3++)
 		{
 			fgetc(data);
 		}
@@ -134,11 +143,11 @@ int G5ETerrainObject::gettxtdata(char *file, unsigned int INsizex, unsigned int 
 	fclose(data);
 	return 1;
 }
-unsigned int G5ETerrainObject::getdimX()
+int G5ETerrainObject::getdimX()
 {
 	return this->dimX;
 }
-unsigned int G5ETerrainObject::getdimZ()
+int G5ETerrainObject::getdimZ()
 {
 	return this->dimZ;
 }
@@ -149,4 +158,14 @@ float G5ETerrainObject::getmax()
 float G5ETerrainObject::getmin()
 {
 	return this->minheight;
+}
+float G5ETerrainObject::getHeight(int x, int z)
+{
+	if(x < -(this->dimX/2) || x > this->dimX/2-1 || z < -(this->dimZ/2) || z > this->dimZ/2-1) return G5E_INVALID_VALUE;
+	return this->heightmap[x+(this->dimX/2) + dimX * (z+(this->dimZ/2))];
+}
+int G5ETerrainObject::setHeight(float height, int x, int z)
+{
+	if(x < -(this->dimX/2) || x > this->dimX/2-1 || z < -(this->dimZ/2) || z > this->dimZ/2-1) return G5E_INVALID_VALUE;
+	this->heightmap[x+(this->dimX/2) + dimX * (z+(this->dimZ/2))]=height;
 }

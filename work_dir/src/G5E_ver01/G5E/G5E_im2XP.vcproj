@@ -191,6 +191,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\g5e_manager.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\g5e_math.cpp"
 				>
 			</File>
@@ -199,7 +203,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\g5e_text.cpp"
+				RelativePath=".\g5e_terrainedit.cpp"
 				>
 			</File>
 			<File
@@ -241,6 +245,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\g5e_manager.h"
+				>
+			</File>
+			<File
 				RelativePath=".\g5e_math.h"
 				>
 			</File>
@@ -253,7 +261,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\g5e_text.h"
+				RelativePath=".\g5e_terrainedit.h"
 				>
 			</File>
 			<File

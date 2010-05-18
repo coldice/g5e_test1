@@ -4,7 +4,6 @@
 #include "g5e_std.h"
 #include "g5e_world.h"
 #include "g5e_system.h"
-#include "g5e_text.h"
 #include "g5e_camera.h"
 #include "g5e_time.h"
 class G5EDrawObjects
@@ -33,7 +32,6 @@ class G5EDraw
 private:
 
 public:
-	G5EText gtext;
 	G5ESystem *gsystem;
 	G5EDrawObjects *gdrawobjects;
 	G5ETimer *fpstimer;

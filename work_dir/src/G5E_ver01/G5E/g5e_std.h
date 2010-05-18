@@ -6,3 +6,4 @@
 #include <math.h>
 #include "g5e_time.h"
 #include "g5e_log.h"
+#include "string.h"

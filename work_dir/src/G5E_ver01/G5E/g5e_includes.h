@@ -16,11 +16,12 @@
 #include "g5e_math.h"
 #include "g5e_camera.h"
 #include "g5e_time.h"
+#include "g5e_text.h"
 #include "g5e_system.h"
 #include "g5e_world.h"
 #include "g5e_draw.h"
-#include "g5e_interface.h"
 #include "g5e_manager.h"
+#include "g5e_interface.h"
 
 #include "g5e_terrainedit.h"
 

@@ -150,7 +150,6 @@ int G5EDraw::init(G5ESystem *INgsystem)
 	this->gsystem = INgsystem;
 	this->fpstimer = new G5ETimer();
 	this->fps = 0;
-	this->gtext.init();	
 	return TRUE;
 }
 	// draw run
@@ -169,19 +168,13 @@ int G5EDraw::run() //
 	/* Zeichnen des Meshobjects über die drawlist */
 	gdrawobjects->draw_terrainslist();	
 	gdrawobjects->draw_meshslist();
-	glTranslatef(0.0f,0.0f,-5.0f);
-	gdrawobjects->draw_meshsdirect();
 
 
 	/* Momentane FPS Darstellung */
 	if(this->fpstimer->check(0.1,1))
 	{                          
-		fps = this->gsystem->gtime->getffps();
-	}
-	gtext.print(100,100, 100, 0, 0, 0.1f, "%.1f", fps);		
+	}	
 
-	/* Diesdas*/
-	gdrawobjects->gworldmeshobject[0]->translatef(0.01f,0,0);	
 
 	//swap sdl buffer
 	//SDL_GL_SwapBuffers(); -> moved to run_end
@@ -212,7 +205,6 @@ int G5EDraw::run_end() {
 }
 int G5EDraw::free()
 {
-	this->gtext.free();
 	delete this->fpstimer;
 	delete this->gcamera;
 	delete this->gdrawobjects;
